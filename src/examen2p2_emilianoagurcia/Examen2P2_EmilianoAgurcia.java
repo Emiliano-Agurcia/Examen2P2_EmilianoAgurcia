@@ -120,7 +120,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jLabel2.setText("Edad");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, -1, -1));
 
-        SP_Reparados.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        SP_Reparados.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         jPanel1.add(SP_Reparados, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 100, -1));
 
         jLabel3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
@@ -178,7 +178,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jLabel9.setText("Año de fabricación");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
-        SP_Costo.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 0.1d));
+        SP_Costo.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
         jPanel2.add(SP_Costo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 190, 30));
 
         jLabel10.setText("Estado de Reparación");
@@ -344,7 +344,9 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         }
 
         jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(632, 230, 640, 460));
-        jPanel3.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, 460, 30));
+
+        jProgressBar1.setStringPainted(true);
+        jPanel3.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, 470, 30));
 
         jLabel21.setText("*Estado*");
         jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, -1, -1));
@@ -360,7 +362,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
 
         jButton1.setText("Reparar");
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, 220, 50));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, 220, 50));
 
         jTabbedPane1.addTab("Simulación", jPanel3);
 
@@ -375,15 +377,13 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(51, 51, 51));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        TB_Reaparaciones.setBackground(new java.awt.Color(51, 51, 51));
         TB_Reaparaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Empleado", "Carro a Reparar", "Exito"
+                "Empleado", "Carro", "Reparado"
             }
         ) {
             Class[] types = new Class [] {
@@ -410,7 +410,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
             TB_Reaparaciones.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 780, 520));
+        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 780, 570));
 
         jTabbedPane1.addTab("Reparaciones", jPanel6);
 
@@ -482,7 +482,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
                     TF_Modelo.getText(),
                     (int) SP_Year.getValue(),
                     (String) CB_Estado.getSelectedItem(),
-                    (double)SP_Costo.getValue()
+                    (int)SP_Costo.getValue()
             );
             ListaCarros.add(newCarro);
             Actualizar();
@@ -501,7 +501,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
             ListaCarros.get(ListaCarros.indexOf(Selected_Carro)).setMarca((String) Mod_CB_Marca.getSelectedItem());
             ListaCarros.get(ListaCarros.indexOf(Selected_Carro)).setModelo(Mod_TF_Modelo.getText());
             ListaCarros.get(ListaCarros.indexOf(Selected_Carro)).setYearFabricado((int) Mod_SP_Year.getValue());
-            ListaCarros.get(ListaCarros.indexOf(Selected_Carro)).setCosto((double) Mod_SP_Costo.getValue());
+            ListaCarros.get(ListaCarros.indexOf(Selected_Carro)).setCosto((int) Mod_SP_Costo.getValue());
             ListaCarros.get(ListaCarros.indexOf(Selected_Carro)).setEstado((String) Mod_CB_Estado.getSelectedItem());
             ListaCarros.get(ListaCarros.indexOf(Selected_Carro));
             ListaCarros.get(ListaCarros.indexOf(Selected_Carro));
@@ -685,7 +685,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
     private void Limpiar_AgregarEmpleado(){
         TF_Nombre.setText("");
         SP_Edad.setValue(10);
-        SP_Reparados.setValue(0);
+        SP_Reparados.setValue(1);
         TF_ID.setText("");
     }
     private void Limpiar_AgregarCarro(){
