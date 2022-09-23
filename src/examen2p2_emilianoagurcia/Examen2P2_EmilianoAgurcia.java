@@ -6,8 +6,11 @@
 package examen2p2_emilianoagurcia;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +23,8 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
      */
     public Examen2P2_EmilianoAgurcia() {
         initComponents();
+        Cargar();
+        Actualizar();
     }
 
     /**
@@ -58,7 +63,6 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         CB_Marca = new javax.swing.JComboBox<>();
         SP_Year = new javax.swing.JSpinner();
         jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -76,6 +80,11 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         CB_CarroModificar = new javax.swing.JComboBox<>();
         jLabel20 = new javax.swing.JLabel();
+        BT_AgregarCarro = new javax.swing.JButton();
+        BT_ModificarCarro = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TB_ListaCarros = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -91,19 +100,19 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(TF_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 260, 30));
+        jPanel1.add(TF_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 260, 30));
 
         jLabel1.setText("Nombre:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 60, 20));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 60, 20));
 
         SP_Edad.setModel(new javax.swing.SpinnerNumberModel(10, 10, null, 1));
-        jPanel1.add(SP_Edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 100, -1));
+        jPanel1.add(SP_Edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 100, -1));
 
         jLabel2.setText("Edad");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, -1, -1));
 
         SP_Reparados.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        jPanel1.add(SP_Reparados, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 100, -1));
+        jPanel1.add(SP_Reparados, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 100, -1));
 
         jLabel3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
@@ -112,11 +121,11 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(659, 60, 650, -1));
 
         jLabel4.setText("Num. de Identidad");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, -1, -1));
-        jPanel1.add(TF_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, 260, 30));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, -1, -1));
+        jPanel1.add(TF_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, 260, 30));
 
         jLabel5.setText("Carros Reparados");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, -1, -1));
 
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -131,6 +140,11 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jPanel1.add(CB_Empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 100, 330, 30));
 
         BT_EliminarEmpleado.setText("Eliminar");
+        BT_EliminarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BT_EliminarEmpleadoActionPerformed(evt);
+            }
+        });
         jPanel1.add(BT_EliminarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 190, 200, 40));
 
         BT_AgregarEmpleado.setText("Agregar");
@@ -139,7 +153,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
                 BT_AgregarEmpleadoActionPerformed(evt);
             }
         });
-        jPanel1.add(BT_AgregarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 510, 200, 40));
+        jPanel1.add(BT_AgregarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 510, 200, 40));
 
         jTabbedPane1.addTab("CRUD Empleados", jPanel1);
 
@@ -164,15 +178,13 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
 
         CB_Marca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nissan", "Toyota", "Kia", "McLaren", "Suzuki", "Honda", "Ferrari" }));
         jPanel2.add(CB_Marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 190, 30));
+
+        SP_Year.setModel(new javax.swing.SpinnerNumberModel(1800, 1800, 2023, 1));
         jPanel2.add(SP_Year, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 190, 30));
 
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 10, 760));
-
-        jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
-        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 0, 10, 760));
 
         jLabel11.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 255));
@@ -232,12 +244,62 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jLabel19.setText("Costo de Reparación");
         jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 480, -1, -1));
 
-        CB_CarroModificar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel2.add(CB_CarroModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 150, 200, 30));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel20.setText("Carro a Modificar");
         jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, -1, 20));
+
+        BT_AgregarCarro.setText("Agregar");
+        BT_AgregarCarro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BT_AgregarCarroActionPerformed(evt);
+            }
+        });
+        jPanel2.add(BT_AgregarCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 570, 200, 40));
+
+        BT_ModificarCarro.setText("Modificar");
+        BT_ModificarCarro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BT_ModificarCarroActionPerformed(evt);
+            }
+        });
+        jPanel2.add(BT_ModificarCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 650, 200, 40));
+
+        jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 0, 10, 760));
+
+        jScrollPane2.setBorder(null);
+
+        TB_ListaCarros.setBackground(new java.awt.Color(51, 51, 51));
+        TB_ListaCarros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Marca", "Modelo", "Fabricado en", "Estado", "Costo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TB_ListaCarros.setShowHorizontalLines(true);
+        jScrollPane2.setViewportView(TB_ListaCarros);
+        if (TB_ListaCarros.getColumnModel().getColumnCount() > 0) {
+            TB_ListaCarros.getColumnModel().getColumn(0).setResizable(false);
+            TB_ListaCarros.getColumnModel().getColumn(1).setResizable(false);
+            TB_ListaCarros.getColumnModel().getColumn(2).setResizable(false);
+            TB_ListaCarros.getColumnModel().getColumn(3).setResizable(false);
+            TB_ListaCarros.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 100, 400, 660));
 
         jTabbedPane1.addTab("CRUD Carros", jPanel2);
 
@@ -324,16 +386,60 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Por favor complete la información");
         }else{
             try {
-                adminArchivos AD = new adminArchivos("./Empleados.emi");
-                AD.DownloadEmpleados();    
-                AD.getListaEmpleados().add(new Empleado());
+                Empleado newEmpleado = new Empleado(
+                        TF_Nombre.getText(),
+                        (int) SP_Edad.getValue(),
+                        TF_ID.getText(),
+                        (int) SP_Reparados.getValue()
+                );
+                ListaEmpleados.add(newEmpleado);
+                Actualizar();
                 
-                
+                JOptionPane.showMessageDialog(this, "Creado Exitosamente");
+                Limpiar_AgregarEmpleado();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
     }//GEN-LAST:event_BT_AgregarEmpleadoActionPerformed
+
+    private void BT_EliminarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_EliminarEmpleadoActionPerformed
+        if(CB_Empleados.getSelectedIndex() != -1){
+            try {
+                Empleado Selected_Empleado = (Empleado) CB_Empleados.getSelectedItem();
+                ListaEmpleados.remove(  ListaEmpleados.indexOf(Selected_Empleado));
+                Actualizar();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            
+        }
+    }//GEN-LAST:event_BT_EliminarEmpleadoActionPerformed
+
+    private void BT_AgregarCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_AgregarCarroActionPerformed
+        if(CB_Marca.getSelectedIndex() == -1 || TF_Modelo.getText().isBlank() || CB_Estado.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this, "Por favor complete la información");
+        }else{
+            Carro newCarro = new Carro(
+                    (String) CB_Marca.getSelectedItem(),
+                    TF_Modelo.getText(),
+                    (int) SP_Year.getValue(),
+                    (String) CB_Estado.getSelectedItem(),
+                    (double)SP_Costo.getValue()
+            );
+            ListaCarros.add(newCarro);
+            Actualizar();
+            
+            JOptionPane.showMessageDialog(this, "Creado Exitosamente");
+            Limpiar_AgregarCarro();
+        }
+    }//GEN-LAST:event_BT_AgregarCarroActionPerformed
+
+    private void BT_ModificarCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_ModificarCarroActionPerformed
+        if(CB_CarroModificar.getSelectedIndex() != -1){
+             Carro Selected_Carro = (Carro) CB_CarroModificar.getSelectedItem();
+        }
+    }//GEN-LAST:event_BT_ModificarCarroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,8 +460,10 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BT_AgregarCarro;
     private javax.swing.JButton BT_AgregarEmpleado;
     private javax.swing.JButton BT_EliminarEmpleado;
+    private javax.swing.JButton BT_ModificarCarro;
     private javax.swing.JPanel Background;
     private javax.swing.JComboBox<String> CB_CarroModificar;
     private javax.swing.JComboBox<String> CB_Empleados;
@@ -370,6 +478,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
     private javax.swing.JSpinner SP_Edad;
     private javax.swing.JSpinner SP_Reparados;
     private javax.swing.JSpinner SP_Year;
+    private javax.swing.JTable TB_ListaCarros;
     private javax.swing.JTable TB_Reaparaciones;
     private javax.swing.JTextField TF_ID;
     private javax.swing.JTextField TF_Modelo;
@@ -401,9 +510,109 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
+    //Para modificar desde el Main y darle set a la lista en el Binario
+    ArrayList <Empleado> ListaEmpleados = new ArrayList();
+    ArrayList <Carro> ListaCarros = new ArrayList();
+    
+    private void Cargar(){
+        try {
+            //Empleados
+            adminArchivos AE = new adminArchivos("./Empleados.emi");
+            AE.DownloadEmpleados();
+            for (Empleado emp : AE.getListaEmpleados()) {
+                ListaEmpleados.add(emp);
+            }             
+            
+            //Carros
+            adminArchivos AC = new adminArchivos("./Carros.emi");
+            AC.DownloadCarros();
+            for (Carro carro : AC.getListaCarros()) {
+                ListaCarros.add(carro);
+            }
+        } catch (Exception e) {
+        }
+    }
+    private void Actualizar(){
+        try {
+        //ListaEmpleados
+            adminArchivos AE = new adminArchivos("./Empleados.emi");
+            AE.DownloadEmpleados();
+            AE.setListaEmpleados(ListaEmpleados);
+            AE.UploadEmpleados();
+            
+        //ListaCarros
+            adminArchivos AC = new adminArchivos("./Carros.emi");
+            AC.DownloadCarros();
+            AC.setListaCarros(ListaCarros);
+            AC.UploadCarros();
+        
+        //Eliminar Empleado
+            //ComboBox
+            DefaultComboBoxModel mCB_Empleados = (DefaultComboBoxModel) CB_Empleados.getModel();
+            mCB_Empleados.removeAllElements();
+            for (Empleado empleado : ListaEmpleados) {
+                mCB_Empleados.addElement(empleado);
+            }
+            CB_Empleados.setModel(mCB_Empleados);
+            
+        //Modificar Carro
+            //ComboBox
+            DefaultComboBoxModel mCBCB_CarroModificar = (DefaultComboBoxModel) CB_CarroModificar.getModel();
+            mCBCB_CarroModificar.removeAllElements();
+            for (Carro carro : ListaCarros) {
+                mCBCB_CarroModificar.addElement(carro);
+            }
+            CB_CarroModificar.setModel(mCBCB_CarroModificar);
+            
+            //Casillas / Datos
+            if(CB_CarroModificar.getSelectedIndex() != -1){
+                Carro Selected_Carro = (Carro) CB_CarroModificar.getSelectedItem();
+                
+                Mod_CB_Marca.setSelectedItem( Selected_Carro.getMarca() );
+                Mod_TF_Modelo.setText(Selected_Carro.getModelo());
+                Mod_SP_Year.setValue( Selected_Carro.getYearFabricado() );
+                Mod_SP_Costo.setValue( Selected_Carro.getCosto() );
+                Mod_CB_Estado.setSelectedItem( Selected_Carro.getEstado() );
+            }
+            
+        //Listar Carros    
+            DefaultTableModel mTB = (DefaultTableModel) TB_ListaCarros.getModel();
+            mTB.setRowCount(0);
+            for (Carro carro : ListaCarros) {
+                Object[] newRow = {
+                    carro.getMarca(),
+                    carro.getModelo(),
+                    carro.getYearFabricado(),
+                    carro.getEstado(),
+                    carro.getCosto()
+                };
+                mTB.addRow(newRow);
+            }
+            TB_ListaCarros.setModel(mTB);
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    private void Limpiar_AgregarEmpleado(){
+        TF_Nombre.setText("");
+        SP_Edad.setValue(10);
+        SP_Reparados.setValue(0);
+        TF_ID.setText("");
+    }
+    private void Limpiar_AgregarCarro(){
+        CB_Marca.setSelectedIndex(0);
+        TF_Modelo.setText("");
+        SP_Year.setValue(1800);
+        SP_Costo.setValue(0);
+        CB_Estado.setSelectedIndex(0);
+    }
+
 }

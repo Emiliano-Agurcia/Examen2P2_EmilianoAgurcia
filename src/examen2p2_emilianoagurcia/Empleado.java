@@ -54,6 +54,6 @@ public class Empleado implements Serializable{
 
     @Override
     public String toString() {
-        return "Empleado{" + "Nombre=" + Nombre + ", Edad=" + Edad + ", ID=" + ID + ", CarrosReparados=" + CarrosReparados + '}';
+        return "ID: "+ID+" Nombre: "+Nombre;
     }
 }

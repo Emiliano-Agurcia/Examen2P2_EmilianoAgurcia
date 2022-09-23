@@ -20,6 +20,7 @@ import java.util.ArrayList;
  */
 public class adminArchivos {
     ArrayList <Empleado> ListaEmpleados = new ArrayList();
+    ArrayList <Carro> ListaCarros = new ArrayList();
     File Archivo = null;
 
     public adminArchivos(String Path) {
@@ -31,6 +32,13 @@ public class adminArchivos {
     }
     public void setListaEmpleados(ArrayList<Empleado> ListaEmpleados) {
         this.ListaEmpleados = ListaEmpleados;
+    }
+
+    public ArrayList<Carro> getListaCarros() {
+        return ListaCarros;
+    }
+    public void setListaCarros(ArrayList<Carro> ListaCarros) {
+        this.ListaCarros = ListaCarros;
     }
     
     public File getArchivo() {
@@ -70,6 +78,50 @@ public class adminArchivos {
             BW = new ObjectOutputStream(FW);
             
             for (Empleado t : ListaEmpleados) {
+                BW.writeObject(t);                                              //writeObject
+            }
+            BW.flush();
+            
+        } catch (Exception e) {
+        }
+        
+        try {
+            FW.close();
+            BW.close();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void DownloadCarros() throws FileNotFoundException, IOException{
+        ListaCarros = new ArrayList();
+        Carro temporal;
+        FileInputStream FR = null;
+        ObjectInputStream BR = null;
+        
+        if(Archivo.exists()){
+            FR = new FileInputStream(Archivo);
+            BR = new ObjectInputStream(FR);
+            
+            try {
+                while( ( temporal = (Carro) BR.readObject() ) != null ){      //readObject
+                    ListaCarros.add(temporal);
+                }
+            } catch (Exception e) {
+            }
+            
+            FR.close();
+            BR.close();
+        }
+    }
+    public void UploadCarros(){
+        FileOutputStream FW = null;
+        ObjectOutputStream BW = null;
+        
+        try {
+            FW = new FileOutputStream(Archivo);
+            BW = new ObjectOutputStream(FW);
+            
+            for (Carro t : ListaCarros) {
                 BW.writeObject(t);                                              //writeObject
             }
             BW.flush();
