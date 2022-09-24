@@ -527,6 +527,8 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
                     ListaReparaciones
             );
             Hilo_Reparacion.start();
+            
+            jLabel21.setText( (String) CB_Estado.getSelectedIndex() );
         }
     }//GEN-LAST:event_Sim_BT_RepararActionPerformed
 

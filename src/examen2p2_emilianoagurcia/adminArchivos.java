@@ -231,7 +231,6 @@ public class adminArchivos {
 
                             //Lista
                             Reparacion reparacion = new Reparacion(empleado, carro, exitoso);
-                            System.out.println(reparacion);
                             ListaReparaciones.add(reparacion);    
                         }
                     }
