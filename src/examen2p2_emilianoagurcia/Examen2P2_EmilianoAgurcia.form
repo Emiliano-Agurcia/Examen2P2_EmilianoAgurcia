@@ -815,7 +815,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel21">
+                <Component class="javax.swing.JLabel" name="L_Estado">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Estado Final: *Por reparar/En espera/ ...*"/>
                   </Properties>

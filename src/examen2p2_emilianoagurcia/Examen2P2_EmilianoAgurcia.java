@@ -92,7 +92,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         Sim_BT_Reparar = new javax.swing.JButton();
-        jLabel21 = new javax.swing.JLabel();
+        L_Estado = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TB_Reparaciones = new javax.swing.JTable();
         jLabel24 = new javax.swing.JLabel();
@@ -348,8 +348,8 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         });
         jPanel3.add(Sim_BT_Reparar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, 220, 50));
 
-        jLabel21.setText("Estado Final: *Por reparar/En espera/ ...*");
-        jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, -1, -1));
+        L_Estado.setText("Estado Final: *Por reparar/En espera/ ...*");
+        jPanel3.add(L_Estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, -1, -1));
 
         TB_Reparaciones.setBackground(new java.awt.Color(51, 51, 51));
         TB_Reparaciones.setModel(new javax.swing.table.DefaultTableModel(
@@ -528,7 +528,9 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
             );
             Hilo_Reparacion.start();
             
-            jLabel21.setText( (String) CB_Estado.getSelectedIndex() );
+            int EstadoAnterior = CB_Estado.getSelectedIndex();
+            
+            L_Estado.setText(text);
         }
     }//GEN-LAST:event_Sim_BT_RepararActionPerformed
 
@@ -572,6 +574,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> CB_Empleados;
     private javax.swing.JComboBox<String> CB_Estado;
     private javax.swing.JComboBox<String> CB_Marca;
+    private javax.swing.JLabel L_Estado;
     private javax.swing.JComboBox<String> Mod_CB_Estado;
     private javax.swing.JComboBox<String> Mod_CB_Marca;
     private javax.swing.JSpinner Mod_SP_Costo;
@@ -604,7 +607,6 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
