@@ -86,15 +86,13 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         TB_ListaCarros = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jLabel21 = new javax.swing.JLabel();
+        Sim_PB_Reparacion = new javax.swing.JProgressBar();
         Sim_CB_Empleado = new javax.swing.JComboBox<>();
         Sim_CB_Carro = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Sim_BT_Reparar = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -178,7 +176,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jLabel9.setText("Año de fabricación");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
-        SP_Costo.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
+        SP_Costo.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         jPanel2.add(SP_Costo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 190, 30));
 
         jLabel10.setText("Estado de Reparación");
@@ -188,7 +186,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         CB_Marca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nissan", "Toyota", "Kia", "McLaren", "Suzuki", "Honda", "Ferrari" }));
         jPanel2.add(CB_Marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 190, 30));
 
-        SP_Year.setModel(new javax.swing.SpinnerNumberModel(1800, 1800, 2023, 1));
+        SP_Year.setModel(new javax.swing.SpinnerNumberModel(2020, 1800, 2023, 1));
         jPanel2.add(SP_Year, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 190, 30));
 
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
@@ -255,6 +253,11 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jLabel19.setText("Costo de Reparación");
         jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 480, -1, -1));
 
+        CB_CarroModificar.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CB_CarroModificarItemStateChanged(evt);
+            }
+        });
         jPanel2.add(CB_CarroModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 150, 200, 30));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -317,39 +320,13 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Carro", "Empleado", "Operación"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-        }
-
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(632, 230, 640, 460));
-
-        jProgressBar1.setStringPainted(true);
-        jPanel3.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, 470, 30));
-
-        jLabel21.setText("*Estado*");
-        jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, -1, -1));
+        Sim_PB_Reparacion.setBackground(new java.awt.Color(0, 0, 0));
+        Sim_PB_Reparacion.setForeground(new java.awt.Color(0, 153, 0));
+        Sim_PB_Reparacion.setMaximum(1000000);
+        Sim_PB_Reparacion.setToolTipText("");
+        Sim_PB_Reparacion.setString("Elija un reparador y un carro a reparar");
+        Sim_PB_Reparacion.setStringPainted(true);
+        jPanel3.add(Sim_PB_Reparacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 470, 30));
 
         jPanel3.add(Sim_CB_Empleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 280, 40));
 
@@ -361,8 +338,16 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jLabel23.setText("Empleado");
         jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
 
-        jButton1.setText("Reparar");
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, 220, 50));
+        Sim_BT_Reparar.setText("Reparar");
+        Sim_BT_Reparar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Sim_BT_RepararActionPerformed(evt);
+            }
+        });
+        jPanel3.add(Sim_BT_Reparar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, 220, 50));
+
+        jLabel21.setText("Estado Final: *Por reparar/En espera/ ...*");
+        jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, -1, -1));
 
         jTabbedPane1.addTab("Simulación", jPanel3);
 
@@ -511,6 +496,35 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BT_ModificarCarroActionPerformed
 
+    private void Sim_BT_RepararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sim_BT_RepararActionPerformed
+        if(Sim_CB_Empleado.getSelectedIndex() == -1 && Sim_CB_Carro.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this, "Debe elegir un reparador y un carro para reparar");
+        }else{
+            Empleado Selected_Empleado = (Empleado) Sim_CB_Empleado.getSelectedItem();
+            Carro Selected_Carro = (Carro) Sim_CB_Carro.getSelectedItem();
+            
+            Hilo_Reparacion = new adminHilo(
+                    TB_Reaparaciones,
+                    Selected_Empleado,
+                    Selected_Carro,
+                    Sim_PB_Reparacion
+            );
+            Hilo_Reparacion.start();
+        }
+    }//GEN-LAST:event_Sim_BT_RepararActionPerformed
+
+    private void CB_CarroModificarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CB_CarroModificarItemStateChanged
+        Carro Selected_Carro = (Carro) CB_CarroModificar.getSelectedItem();
+        ListaCarros.get(ListaCarros.indexOf(Selected_Carro)).setMarca((String) Mod_CB_Marca.getSelectedItem());
+        ListaCarros.get(ListaCarros.indexOf(Selected_Carro)).setModelo(Mod_TF_Modelo.getText());
+        ListaCarros.get(ListaCarros.indexOf(Selected_Carro)).setYearFabricado((int) Mod_SP_Year.getValue());
+        ListaCarros.get(ListaCarros.indexOf(Selected_Carro)).setCosto((int) Mod_SP_Costo.getValue());
+        ListaCarros.get(ListaCarros.indexOf(Selected_Carro)).setEstado((String) Mod_CB_Estado.getSelectedItem());
+        ListaCarros.get(ListaCarros.indexOf(Selected_Carro));
+        ListaCarros.get(ListaCarros.indexOf(Selected_Carro));
+        ListaCarros.get(ListaCarros.indexOf(Selected_Carro));
+    }//GEN-LAST:event_CB_CarroModificarItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -548,14 +562,15 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
     private javax.swing.JSpinner SP_Edad;
     private javax.swing.JSpinner SP_Reparados;
     private javax.swing.JSpinner SP_Year;
+    private javax.swing.JButton Sim_BT_Reparar;
     private javax.swing.JComboBox<String> Sim_CB_Carro;
     private javax.swing.JComboBox<String> Sim_CB_Empleado;
+    private javax.swing.JProgressBar Sim_PB_Reparacion;
     private javax.swing.JTable TB_ListaCarros;
     private javax.swing.JTable TB_Reaparaciones;
     private javax.swing.JTextField TF_ID;
     private javax.swing.JTextField TF_Modelo;
     private javax.swing.JTextField TF_Nombre;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -585,35 +600,36 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
     //Para modificar desde el Main y darle set a la lista en el Binario
     ArrayList <Empleado> ListaEmpleados = new ArrayList();
     ArrayList <Carro> ListaCarros = new ArrayList();
+    ArrayList <Reparacion> ListaReparaciones = new ArrayList();
+    adminHilo Hilo_Reparacion;
     
     private void Cargar(){
         try {
             //Empleados
             adminArchivos AE = new adminArchivos("./Empleados.emi");
             AE.DownloadEmpleados();
-            for (Empleado emp : AE.getListaEmpleados()) {
-                ListaEmpleados.add(emp);
-            }             
+            ListaEmpleados = AE.getListaEmpleados();
             
             //Carros
             adminArchivos AC = new adminArchivos("./Carros.emi");
             AC.DownloadCarros();
-            for (Carro carro : AC.getListaCarros()) {
-                ListaCarros.add(carro);
-            }
+            ListaCarros = AC.getListaCarros();
+            
+            //Reparaciones
+            adminArchivos AR = new adminArchivos("./Reparaciones.emi");
+            AR.DownloadReparaciones();
+            ListaReparaciones = AR.getListaReparaciones();
+            
         } catch (Exception e) {
         }
     }
@@ -631,7 +647,12 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
             AC.setListaCarros(ListaCarros);
             AC.UploadCarros();
         
-        
+        //ListaReparaciones    
+            adminArchivos AR = new adminArchivos("./Reparaciones.emi");
+            AR.DownloadReparaciones();
+            AR.setListaReparaciones(ListaReparaciones);
+            AR.UploadReparaciones();
+            
         //ComboBox Empleados
             DefaultComboBoxModel mCB_Empleados = (DefaultComboBoxModel) CB_Empleados.getModel();
             mCB_Empleados.removeAllElements();
@@ -663,8 +684,8 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
             }
             
         //Listar Carros    
-            DefaultTableModel mTB = (DefaultTableModel) TB_ListaCarros.getModel();
-            mTB.setRowCount(0);
+            DefaultTableModel mTB_ListaCarros = (DefaultTableModel) TB_ListaCarros.getModel();
+            mTB_ListaCarros.setRowCount(0);
             for (Carro carro : ListaCarros) {
                 Object[] newRow = {
                     carro.getMarca(),
@@ -673,9 +694,24 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
                     carro.getEstado(),
                     carro.getCosto()
                 };
-                mTB.addRow(newRow);
+                mTB_ListaCarros.addRow(newRow);
             }
-            TB_ListaCarros.setModel(mTB);
+            TB_ListaCarros.setModel(mTB_ListaCarros);
+            
+        //Lista Reparaciones
+            DefaultTableModel mTB_ListaReparaciones = (DefaultTableModel) TB_Reaparaciones.getModel();
+            mTB_ListaReparaciones.setRowCount(0);
+            
+            for (Reparacion reparacion : ListaReparaciones) {
+                Object[] newRow = {
+                    reparacion.getEmpleado(),
+                    reparacion.getCarro(),
+                    reparacion.isExito()
+                };
+                mTB_ListaReparaciones.addRow(newRow);    
+            }
+            
+            TB_Reaparaciones.setModel(mTB_ListaReparaciones);
             
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -691,7 +727,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
     private void Limpiar_AgregarCarro(){
         CB_Marca.setSelectedIndex(0);
         TF_Modelo.setText("");
-        SP_Year.setValue(1800);
+        SP_Year.setValue(2020);
         SP_Costo.setValue(0);
         CB_Estado.setSelectedIndex(0);
     }

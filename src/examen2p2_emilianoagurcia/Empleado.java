@@ -17,6 +17,9 @@ public class Empleado implements Serializable{
     String ID;
     int CarrosReparados;
 
+    public Empleado() {
+    }
+
     public Empleado(String Nombre, int Edad, String ID, int CarrosReparados) {
         this.Nombre = Nombre;
         this.Edad = Edad;

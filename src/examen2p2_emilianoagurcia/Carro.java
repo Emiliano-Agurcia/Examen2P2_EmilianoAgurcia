@@ -18,6 +18,9 @@ public class Carro implements Serializable{
     String Estado;
     double Costo;
 
+    public Carro() {
+    }
+
     public Carro(String Marca, String Modelo, int YearFabricado, String Estado, double Costo) {
         this.Marca = Marca;
         this.Modelo = Modelo;

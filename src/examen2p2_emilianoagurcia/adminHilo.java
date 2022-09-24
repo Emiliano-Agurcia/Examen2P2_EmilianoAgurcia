@@ -20,7 +20,6 @@ public class adminHilo extends Thread{
     JTable TB_Reaparaciones;
     boolean Exito;
     boolean Completado;
-    boolean Avanzar;
 
     public adminHilo(JTable TB_Reaparaciones, Empleado Empleado, Carro Carro, JProgressBar PB) {
         this.TB_Reaparaciones = TB_Reaparaciones;
@@ -28,6 +27,7 @@ public class adminHilo extends Thread{
         this.Carro = Carro;
         this.PB = PB;
         
+        this.Completado = false;
         this.PB.setMaximum((int)Carro.getCosto());
     }
 
@@ -39,56 +39,62 @@ public class adminHilo extends Thread{
     @Override
     public void run() {
         try {
-            while(!Completado){
-                if(Avanzar){
-                    PB.setValue(PB.getValue() + 1000 );
-
-                    if(PB.getValue() >= PB.getMaximum()){
-                        int Chance = 0;
-                        
-                        //Chance de reparación
-                        if(Empleado.getCarrosReparados() >= 1 && Empleado.getCarrosReparados() <= 5){
-                            Chance = 1+rnd.nextInt(30);
-                        }else if(Empleado.getCarrosReparados() >= 6 && Empleado.getCarrosReparados() <= 15){
-                            Chance = 1+rnd.nextInt(22);
-                        }else if(Empleado.getCarrosReparados() >= 16 && Empleado.getCarrosReparados() <= 30){
-                            Chance = 1+rnd.nextInt(13);
-                        }else if(Empleado.getCarrosReparados() > 30){
-                            Chance = 1+rnd.nextInt(7);
-                        }
-                        
-                        //Si el chance esta entre 1 y 6, la reparación es exitosa
-                        if(Chance >= 1 && Chance <= 6){
-                            Exito = true;
-                        }else{
-                            Exito = false;
-                        }
-                        PB.setString("¡Reparado!");
-                        
-                //Tabla  
-                    DefaultTableModel mTB = (DefaultTableModel) TB_Reaparaciones.getModel();
-                    mTB.setRowCount(0);
+            while (Completado == false) {
+                PB.setValue(PB.getValue() + 1000);
+                PB.setString("Reparando, espere un momento...");
+                
+                if (PB.getValue() >= PB.getMaximum()) {
+                    int Chance = 0;
                     
+                    //Chance de reparación
+                    if (Empleado.getCarrosReparados() >= 1 && Empleado.getCarrosReparados() <= 5) {
+                        Chance = 1 + rnd.nextInt(30);
+                    } else if (Empleado.getCarrosReparados() >= 6 && Empleado.getCarrosReparados() <= 15) {
+                        Chance = 1 + rnd.nextInt(22);
+                    } else if (Empleado.getCarrosReparados() >= 16 && Empleado.getCarrosReparados() <= 30) {
+                        Chance = 1 + rnd.nextInt(13);
+                    } else if (Empleado.getCarrosReparados() > 30) {
+                        Chance = 1 + rnd.nextInt(7);
+                    }
+
+                    //Si el chance esta entre 1 y 6, la reparación es exitosa
+                    if (Chance >= 1 && Chance <= 6) {
+                        Exito = true;
+                    } else {
+                        Exito = false;
+                    }
+                    PB.setString("¡Reparado!");
+
+                    //Archivo de Texto
+                    adminArchivos AD = new adminArchivos("./Reparaciones.emi");
+                    AD.DownloadReparaciones();
+                    AD.getListaReparaciones().add(new Reparacion(Empleado, Carro, Exito));
+                    AD.UploadReparaciones();
+                    
+                    //Tabla  
+                    DefaultTableModel mTB = (DefaultTableModel) TB_Reaparaciones.getModel();
                     Object[] newRow = {
                         Empleado,
                         Carro,
                         Exito
                     };
-                    
                     mTB.addRow(newRow);
                     TB_Reaparaciones.setModel(mTB);
-                        
-                        Thread.sleep(2000);
-                        
-                        PB.setString("Elija un reparador y un carro a reparar");
-                        PB.setValue( 0 );
-                        Avanzar = true;
-                        Completado = true;
-                    }
+                    
+                    
+                    
+                    Thread.sleep(2000);
+
+                    PB.setString("Elija un reparador y un carro a reparar");
+                    PB.setValue(0);
+                    Completado = true;
                 }
-                Thread.sleep(1000);    
-            }    
+                
+                Thread.sleep(1000);
+            }
+
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
