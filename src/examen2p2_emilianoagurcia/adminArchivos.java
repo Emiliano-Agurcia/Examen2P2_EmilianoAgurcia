@@ -173,7 +173,7 @@ public class adminArchivos {
                     BW.write(temp.getCarro().getCosto()+";");
 
                     //Exito
-                    BW.write( String.valueOf(temp.isExito()) );
+                    BW.write( String.valueOf(temp.isExito())+";");
 
                     BW.write("|");
                 }
@@ -232,6 +232,7 @@ public class adminArchivos {
 
                             //Lista
                             Reparacion reparacion = new Reparacion(empleado, carro, exitoso);
+                            System.out.println(reparacion);
                             ListaReparaciones.add(reparacion);    
                         }
                     }
