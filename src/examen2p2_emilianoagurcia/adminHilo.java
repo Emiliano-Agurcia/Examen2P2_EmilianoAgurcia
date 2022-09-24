@@ -67,13 +67,6 @@ public class adminHilo extends Thread{
                         Exito = false;
                     }
                     PB.setString("¡Reparado!");
-
-                    //Archivo de Texto
-                    adminArchivos AD = new adminArchivos("./Reparaciones.emi");
-                    AD.DownloadReparaciones();
-                    ListaReparaciones.add(new Reparacion(Empleado, Carro, Exito));
-                    AD.setListaReparaciones(ListaReparaciones);
-                    AD.UploadReparaciones();
                     
                     //Tabla  
                     DefaultTableModel mTB = (DefaultTableModel) TB_Reaparaciones.getModel();
@@ -85,7 +78,12 @@ public class adminHilo extends Thread{
                     mTB.addRow(newRow);
                     TB_Reaparaciones.setModel(mTB);
                     
-                    
+                    //Archivo de Texto
+                    adminArchivos AD = new adminArchivos("./Reparaciones.txt");
+                    AD.DownloadReparaciones();
+                    ListaReparaciones.add(new Reparacion(Empleado, Carro, Exito));
+                    AD.setListaReparaciones(ListaReparaciones);
+                    AD.UploadReparaciones();
                     
                     Thread.sleep(2000);
 

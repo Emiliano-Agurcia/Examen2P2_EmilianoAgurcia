@@ -1,0 +1,1 @@
+|Ronald;20;12312309;10;Nissan;Nose;2020;1. En espera de entrar a reparación;1000;false;|Gregory;20;879842734;90;Honda;Senda;2021;2. En reparación;20000;true;|

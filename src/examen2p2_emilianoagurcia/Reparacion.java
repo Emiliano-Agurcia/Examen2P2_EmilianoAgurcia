@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author emili
  */
-public class Reparacion implements Serializable{
+public class Reparacion{
     Empleado Empleado;
     Carro Carro;
     boolean Exito;

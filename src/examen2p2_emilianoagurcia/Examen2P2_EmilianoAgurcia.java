@@ -98,6 +98,8 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TB_Entregas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -395,6 +397,22 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(51, 51, 51));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TB_Entregas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Reparado por", "Carro"
+            }
+        ));
+        jScrollPane3.setViewportView(TB_Entregas);
+
+        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 150, 480, -1));
+
         jTabbedPane1.addTab("Entregas", jPanel5);
 
         Background.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 790));
@@ -467,7 +485,6 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
                     (String) CB_Estado.getSelectedItem(),
                     (int) SP_Costo.getValue()
             );
-            System.out.println(newCarro);
             ListaCarros.add(newCarro);
             Actualizar();
             
@@ -566,6 +583,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> Sim_CB_Carro;
     private javax.swing.JComboBox<String> Sim_CB_Empleado;
     private javax.swing.JProgressBar Sim_PB_Reparacion;
+    private javax.swing.JTable TB_Entregas;
     private javax.swing.JTable TB_ListaCarros;
     private javax.swing.JTable TB_Reparaciones;
     private javax.swing.JTextField TF_ID;
@@ -602,6 +620,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -628,7 +647,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
             ListaCarros = AC.getListaCarros();
             
             //Reparaciones
-            adminArchivos AR = new adminArchivos("./Reparaciones.emi");
+            adminArchivos AR = new adminArchivos("./Reparaciones.txt");
             AR.DownloadReparaciones();
             ListaReparaciones = AR.getListaReparaciones();
             
@@ -650,7 +669,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
             AC.UploadCarros();
         
         //ListaReparaciones    
-            adminArchivos AR = new adminArchivos("./Reparaciones.emi");
+            adminArchivos AR = new adminArchivos("./Reparaciones.txt");
             AR.DownloadReparaciones();
             AR.setListaReparaciones(ListaReparaciones);
             AR.UploadReparaciones();
@@ -713,6 +732,22 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
                 mTB_ListaReparaciones.addRow(newRow);    
             }
             TB_Reparaciones.setModel(mTB_ListaReparaciones);
+            
+        //Lista Entregas
+            DefaultTableModel mTB_Entregas = (DefaultTableModel) TB_Entregas.getModel();
+            mTB_Entregas.setRowCount(0);
+            
+            for (Reparacion  rep : ListaReparaciones) {
+                if(rep.getCarro().getEstado().contains("6")){
+                    Object[] newRow = {
+                        rep.getEmpleado(),
+                        rep.getCarro()
+                    };
+                    mTB_Entregas.addRow(newRow);    
+                }
+            }
+            TB_Entregas.setModel(mTB_Entregas);
+            
             
         } catch (Exception e) {
             e.printStackTrace();

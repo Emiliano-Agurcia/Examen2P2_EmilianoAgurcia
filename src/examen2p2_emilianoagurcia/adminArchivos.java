@@ -170,7 +170,7 @@ public class adminArchivos {
                     BW.write(temp.getCarro().getModelo()+";");
                     BW.write(temp.getCarro().getYearFabricado()+";");
                     BW.write(temp.getCarro().getEstado()+";");
-                    BW.write(temp.getCarro().getCosto()+";");
+                    BW.write((int)temp.getCarro().getCosto()+";");
 
                     //Exito
                     BW.write( String.valueOf(temp.isExito())+";");
@@ -201,11 +201,10 @@ public class adminArchivos {
                 BR = new BufferedReader(FR);    
                 
                 if( (Linea = BR.readLine()) != null){
-                    String[] Reparaciones = Linea.split("|");  
-                                                                                System.out.println(Linea);
+                    String[] Reparaciones = Linea.split("\\|");
                     
                     for (int i = 0; i < Reparaciones.length; i++) {
-                        String[] Atributos = Reparaciones[i].split(";");
+                        String[] Atributos = Reparaciones[i].split("\\;");
 
                         if(Atributos.length > 1){
                             Carro carro = new Carro();
