@@ -205,32 +205,35 @@ public class adminArchivos {
                                                                                 System.out.println(Linea);
                     
                     for (int i = 0; i < Reparaciones.length; i++) {
-                        Carro carro = new Carro();
-                        Empleado empleado = new Empleado();
-                        boolean exitoso = false;
-                        
-                        //Empleado
                         String[] Atributos = Reparaciones[i].split(";");
-                        empleado.setNombre                          (Atributos[0]);
-                        empleado.setEdad           (Integer.parseInt(Atributos[1]));
-                        empleado.setID                              (Atributos[2]);
-                        empleado.setCarrosReparados(Integer.parseInt(Atributos[3]));
-                        
-                        //Carro
-                        carro.setMarca                              (Atributos[4]);
-                        carro.setModelo                             (Atributos[5]);
-                        carro.setYearFabricado     (Integer.parseInt(Atributos[6]));
-                        carro.setEstado                             (Atributos[7]);
-                        carro.setCosto             (Integer.parseInt(Atributos[8]));
-                        
-                        //Exito
-                        if(Atributos[9].contains("true")){
-                            exitoso = true;
+
+                        if(Atributos.length > 1){
+                            Carro carro = new Carro();
+                            Empleado empleado = new Empleado();
+                            boolean exitoso = false;
+
+                            //Empleado
+                            empleado.setNombre                          (Atributos[0]);
+                            empleado.setEdad           (Integer.parseInt(Atributos[1]));
+                            empleado.setID                              (Atributos[2]);
+                            empleado.setCarrosReparados(Integer.parseInt(Atributos[3]));
+
+                            //Carro
+                            carro.setMarca                              (Atributos[4]);
+                            carro.setModelo                             (Atributos[5]);
+                            carro.setYearFabricado     (Integer.parseInt(Atributos[6]));
+                            carro.setEstado                             (Atributos[7]);
+                            carro.setCosto             (Integer.parseInt(Atributos[8]));
+
+                            //Exito
+                            if(Atributos[9].contains("true")){
+                                exitoso = true;
+                            }
+
+                            //Lista
+                            Reparacion reparacion = new Reparacion(empleado, carro, exitoso);
+                            ListaReparaciones.add(reparacion);    
                         }
-                        
-                        //Lista
-                        Reparacion reparacion = new Reparacion(empleado, carro, exitoso);
-                        ListaReparaciones.add(reparacion);
                     }
                 }
                 FR.close();

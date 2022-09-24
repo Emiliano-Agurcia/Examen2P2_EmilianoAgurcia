@@ -16,12 +16,12 @@ public class Carro implements Serializable{
     String Modelo;
     int YearFabricado;
     String Estado;
-    double Costo;
+    int Costo;
 
     public Carro() {
     }
 
-    public Carro(String Marca, String Modelo, int YearFabricado, String Estado, double Costo) {
+    public Carro(String Marca, String Modelo, int YearFabricado, String Estado, int Costo) {
         this.Marca = Marca;
         this.Modelo = Modelo;
         this.YearFabricado = YearFabricado;
@@ -60,7 +60,7 @@ public class Carro implements Serializable{
     public double getCosto() {
         return Costo;
     }
-    public void setCosto(double Costo) {
+    public void setCosto(int Costo) {
         this.Costo = Costo;
     }
 

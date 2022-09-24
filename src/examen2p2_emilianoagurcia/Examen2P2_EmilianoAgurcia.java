@@ -93,11 +93,12 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         Sim_BT_Reparar = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TB_Reaparaciones = new javax.swing.JTable();
+        jLabel24 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TB_Reaparaciones = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -349,19 +350,6 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
         jLabel21.setText("Estado Final: *Por reparar/En espera/ ...*");
         jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, -1, -1));
 
-        jTabbedPane1.addTab("Simulación", jPanel3);
-
-        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jTabbedPane1.addTab("Pagos", jPanel4);
-
-        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jTabbedPane1.addTab("Entregas", jPanel5);
-
-        jPanel6.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         TB_Reaparaciones.setBackground(new java.awt.Color(51, 51, 51));
         TB_Reaparaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -395,8 +383,23 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
             TB_Reaparaciones.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 780, 570));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 190, 640, 540));
 
+        jLabel24.setText("Reparaciones hechas");
+        jPanel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 160, -1, -1));
+
+        jTabbedPane1.addTab("Simulación", jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jTabbedPane1.addTab("Pagos", jPanel4);
+
+        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jTabbedPane1.addTab("Entregas", jPanel5);
+
+        jPanel6.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jTabbedPane1.addTab("Reparaciones", jPanel6);
 
         Background.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 790));
@@ -463,11 +466,11 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Por favor complete la información");
         }else{
             Carro newCarro = new Carro(
-                    (String) CB_Marca.getSelectedItem(),
+                   (String) CB_Marca.getSelectedItem(),
                     TF_Modelo.getText(),
-                    (int) SP_Year.getValue(),
+                    (Integer) SP_Year.getValue(),
                     (String) CB_Estado.getSelectedItem(),
-                    (int)SP_Costo.getValue()
+                    (Integer) SP_Costo.getValue()
             );
             ListaCarros.add(newCarro);
             Actualizar();
@@ -507,7 +510,8 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
                     TB_Reaparaciones,
                     Selected_Empleado,
                     Selected_Carro,
-                    Sim_PB_Reparacion
+                    Sim_PB_Reparacion,
+                    ListaReparaciones
             );
             Hilo_Reparacion.start();
         }
@@ -587,6 +591,7 @@ public class Examen2P2_EmilianoAgurcia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

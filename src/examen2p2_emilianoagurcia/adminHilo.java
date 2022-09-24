@@ -5,6 +5,7 @@
  */
 package examen2p2_emilianoagurcia;
 
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
@@ -18,14 +19,16 @@ import javax.swing.table.DefaultTableModel;
 public class adminHilo extends Thread{
     Random rnd = new Random();
     JTable TB_Reaparaciones;
+    ArrayList <Reparacion> ListaReparaciones = new ArrayList();
     boolean Exito;
     boolean Completado;
 
-    public adminHilo(JTable TB_Reaparaciones, Empleado Empleado, Carro Carro, JProgressBar PB) {
+    public adminHilo(JTable TB_Reaparaciones, Empleado Empleado, Carro Carro, JProgressBar PB, ArrayList <Reparacion> ListaReparaciones) {
         this.TB_Reaparaciones = TB_Reaparaciones;
         this.Empleado = Empleado;
         this.Carro = Carro;
         this.PB = PB;
+        this.ListaReparaciones = ListaReparaciones;
         
         this.Completado = false;
         this.PB.setMaximum((int)Carro.getCosto());
@@ -68,7 +71,8 @@ public class adminHilo extends Thread{
                     //Archivo de Texto
                     adminArchivos AD = new adminArchivos("./Reparaciones.emi");
                     AD.DownloadReparaciones();
-                    AD.getListaReparaciones().add(new Reparacion(Empleado, Carro, Exito));
+                    ListaReparaciones.add(new Reparacion(Empleado, Carro, Exito));
+                    AD.setListaReparaciones(ListaReparaciones);
                     AD.UploadReparaciones();
                     
                     //Tabla  
